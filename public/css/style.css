@@ -1,0 +1,30 @@
+body {
+    display: inline;
+    margin: 0px;
+    background: #FBFAF3;
+}
+.wrapper {
+    position: relative; /* Zamiast 'absolute', co pozwoli na bardziej naturalne upływanie dokumentu */
+    z-index: 1;
+    height: 200px;
+    width: 100%;
+    background: #FBFAF3;
+    text-align: center;
+}
+.divLogo img {
+    max-height: 125px;
+    max-width: 250px;
+    height: auto;
+    width: auto;
+    /* pozostałe style */
+}
+.navigation {
+    margin-top: 20px;
+    font-size: 13px;
+    font-family: sans-serif;
+}
+.navigation a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: black; 
+}

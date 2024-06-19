@@ -20,5 +20,10 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
+    # Define your custom command service
+    App\Command\ImportDB:
+        tags:
+            - { name: 'console.command' }
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

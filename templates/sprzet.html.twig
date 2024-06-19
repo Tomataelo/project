@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strona główna</title>
+  <link rel="stylesheet" href="\css\sprzet.css">
+  <script src="\js\pagination.js"></script>
+
+</head>
+
+<body>
+  <header>
+    <div class="logo">
+      <img src="/images/logo.png" alt="Logo firmy">
+    </div>
+    <div class="menu-bar">
+      <div class="menu-item-stan">
+        <a href="{{ path('app_stan') }}"> <button class="stan-magazynowy-btn">STAN MAGAZYNOWY</button> </a>
+      </div>
+      <div class="menu-item-sprzet">
+        <button class="sprzet-btn">SPRZĘT</button>
+      </div>
+      <div class="menu-item-uzytkownicy">
+        <a href="{{ path('app_users') }}">  <button class="uzytkownicy-btn">UŻYTKOWNICY</button> </a>
+      </div>
+    </div>
+    <button class="logout" id="logouserBtn"><img src="/images/logouser.png" alt="Ikona użytkownika"></button>
+  </header>
+
+  <form action="" method="POST">
+
+  <div class="action-buttons">
+      <button type="submit" class="action-btn">Przypisz użytkownika</button> </a>
+    <div class="right-buttons">
+      <a href="{{ path('app_addSprzet') }}">   <button class="action-btn">Dodaj</button> </a>
+      <button class="action-btn">Usuń</button>
+    </div>
+  </div>
+
+  <div class="main-content">
+    <div class="filters-and-table">
+      <div class="filters">
+        <div class="filters-header">FILTRY</div>
+        <div class="filter-category">
+          <div class="filter-header">Typ: </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="laptopCheckbox">
+            <label for="laptopCheckbox">Laptop</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="desktopCheckbox">
+            <label for="desktopCheckbox">Komputer stacjonarny</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="mouseCheckbox">
+            <label for="mouseCheckbox">Myszka</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="headphonesCheckbox">
+            <label for="headphonesCheckbox">Słuchawki</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="keyboardCheckbox">
+            <label for="keyboardCheckbox">Klawiatura</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="monitorCheckbox">
+            <label for="monitorCheckbox">Monitor</label>
+          </div>
+          <div class="filter-header">Producent: </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="laptopCheckbox">
+            <label for="laptopCheckbox">Dell</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="desktopCheckbox">
+            <label for="desktopCheckbox">HP</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="mouseCheckbox">
+            <label for="mouseCheckbox">Apple</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="headphonesCheckbox">
+            <label for="headphonesCheckbox">Logitech</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="keyboardCheckbox">
+            <label for="keyboardCheckbox">Jabra</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="monitorCheckbox">
+            <label for="monitorCheckbox">LG</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="monitorCheckbox">
+            <label for="monitorCheckbox">Asus</label>
+          </div>
+          <h2 class="filter-header">Użytkownik</h2>
+          <select class="filter-select">
+            <option value="">Wybierz użytkownika</option>
+            {% for user in users %}
+              <option value="{{ user.id }}">{{ user.imieNazwisko }}</option>
+            {% endfor %}
+          </select>
+
+          <div class="filter-header">Dostępny: </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="laptopCheckbox">
+            <label for="laptopCheckbox">Tak</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="desktopCheckbox">
+            <label for="desktopCheckbox">Nie</label>
+          </div>
+        </div>
+        <button class="apply-btn">Zastosuj</button>
+
+      </div>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>ZAZNACZ</th>
+            <th>TYP</th>
+            <th>NAZWA</th>
+            <th>PRODUCENT</th>
+            <th>PRZYPISANY UŻYTKOWNIK</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for sprzet in sprzety %}
+            <tr id="{{ sprzet.id }}">
+              <td class="center-checkbox">
+                <input type="checkbox" name="selectedSprzet[]" value="{{ sprzet.id }}">
+              </td>
+            <td onclick="window.location.href='{{ path('app_getSprzet', {'sprzet_id': sprzet.id}) }}'" style="cursor: pointer;" >{{ sprzet.typ }}</td>
+            <td onclick="window.location.href='{{ path('app_getSprzet', {'sprzet_id': sprzet.id}) }}'" style="cursor: pointer;">{{ sprzet.hostname }}</td>
+            <td onclick="window.location.href='{{ path('app_getSprzet', {'sprzet_id': sprzet.id}) }}'" style="cursor: pointer;">{{ sprzet.producent }}</td>
+            <td>{{ sprzet.przypisanyUzytkownik }}</td>
+          </tr>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </form>
+
+      <div class="pagination">
+        <button id="prevPageBtn">&lt;</button>
+        <span id="currentPage">1</span> / <span id="totalPages">1</span>
+        <button id="nextPageBtn">&gt;</button>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <button>Puste</button>
+      <button id="logoutBtn">Wyloguj się</button>
+    </div>
+  </div>
+
+  <script src="\js\script.js"></script>
+</body>
+
+</html>

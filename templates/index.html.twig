@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strona główna</title>
+  <link rel="stylesheet" href="\css\index.css">
+  
+</head>
+
+<body>
+  <header>
+    <div class="logo">
+      <img src="/images/logo.png" alt="Logo firmy">
+    </div>
+    <div class="menu-bar">
+      <div class="menu-item">
+        <a href="{{ path('app_stan') }}"> <button> STAN MAGAZYNOWY</button> </a>
+      </div>
+      <div class="menu-item">
+        <a href="{{ path('app_sprzet') }}">  <button>SPRZĘT</button> </a>
+      </div>
+      <div class="menu-item">
+        <a href="{{ path('app_users') }}">  <button>UŻYTKOWNICY</button> </a>
+      </div>
+    </div>
+    <button class="logout" id="logouserBtn"><img src="/images/logouser.png" alt="Ikona użytkownika"></button>
+  </header>
+  <div class="main-content">
+    <div class="wykres">
+
+    </div>
+
+  </div>
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <button>Puste</button>
+      <button id="logoutBtn">Wyloguj się</button>
+    </div>
+  </div>
+
+  <script src="\js\script.js"></script>
+</body>
+
+</html>
+

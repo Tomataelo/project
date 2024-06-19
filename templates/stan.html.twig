@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strona główna</title>
+  <link rel="stylesheet" href="\css\stan.css">
+  <script src="pagination.js"></script>
+
+</head>
+
+<body>
+  <header>
+
+    <a href="stronaglowna.html" class="logo">
+      <img src="/images/logo.png" alt="Logo firmy">
+    </a>
+
+    <div class="menu-bar">
+      <div class="menu-item">
+        <button id="stanMagazynowyBtn">STAN MAGAZYNOWY</button>
+      </div>
+      <div class="menu-item">
+        <a href="{{ path('app_sprzet') }}"> <button id="sprzetBtn">SPRZĘT</button> </a>
+      </div>
+      <div class="menu-item">
+        <a href="{{ path('app_users') }}"> <button id="uzytkownicyBtn">UŻYTKOWNICY</button> </a>
+      </div>
+    </div>
+
+
+
+    <button class="logout" id="logouserBtn"><img src="logouser.png" alt="Ikona użytkownika"></button>
+  </header>
+
+  <div class="action-buttons">
+    <div class="right-buttons">
+      <button class="action-btn">Dodaj</button>
+      <button class="action-btn">Modyfikuj</button>
+      <button class="action-btn" id="deleteButton">Usuń</button>
+    </div>
+  </div>
+
+  <div class="main-content">
+    <div class="filters-and-table">
+      <div class="filters">
+        <div class="filters-header">FILTRY</div>
+        <div class="filter-category">
+          <div class="filter-header">Typ: </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="laptopCheckbox">
+            <label for="laptopCheckbox">Laptop</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="desktopCheckbox">
+            <label for="desktopCheckbox">Komputer stacjonarny</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="mouseCheckbox">
+            <label for="mouseCheckbox">Myszka</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="headphonesCheckbox">
+            <label for="headphonesCheckbox">Słuchawki</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="keyboardCheckbox">
+            <label for="keyboardCheckbox">Klawiatura</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="monitorCheckbox">
+            <label for="monitorCheckbox">Monitor</label>
+          </div>
+          <div class="filter-header">Producent: </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="laptopCheckbox">
+            <label for="laptopCheckbox">Dell</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="desktopCheckbox">
+            <label for="desktopCheckbox">HP</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="mouseCheckbox">
+            <label for="mouseCheckbox">Apple</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="headphonesCheckbox">
+            <label for="headphonesCheckbox">Logitech</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="keyboardCheckbox">
+            <label for="keyboardCheckbox">Jabra</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="monitorCheckbox">
+            <label for="monitorCheckbox">LG</label>
+          </div>
+          <div class="filter-checkbox">
+            <input type="checkbox" id="monitorCheckbox">
+            <label for="monitorCheckbox">Asus</label>
+          </div>
+        </div>
+        <button class="apply-btn">Zastosuj</button>
+
+      </div>
+
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>ZAZNACZ</th>
+            <th>TYP</th>
+            <th>MODEL</th>
+            <th>PRODUCENT</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for model in modele %}
+          <tr>
+            <td class="center-checkbox">
+              <input type="checkbox" name="selectedModels[]" value="{{ model.id }}">
+            </td>
+            <td onclick="window.location.href='{{ path('app_model', {'model_id': model.id}) }}'" style="cursor: pointer;" > {{ model.typ }} </td>
+            <td onclick="window.location.href='{{ path('app_model', {'model_id': model.id}) }}'" style="cursor: pointer;" > {{ model.nazwa }} </td>
+            <td onclick="window.location.href='{{ path('app_model', {'model_id': model.id}) }}'" style="cursor: pointer;" > {{ model.producent }} </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      <div class="pagination">
+        <button id="prevPageBtn">&lt;</button>
+        <span id="currentPage">1</span> / <span id="totalPages">1</span>
+        <button id="nextPageBtn">&gt;</button>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <button>Puste</button>
+      <button id="logoutBtn">Wyloguj się</button>
+    </div>
+  </div>
+
+  <div id="deleteModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p>Czy na pewno chcesz usunąć wybrany element?</p>
+      <button id="deleteConfirmBtn">Tak</button>
+      <button id="deleteCancelBtn">Nie</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="navi.js"></script>
+  <script src="usunStanMag.js"></script>
+
+
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const dodajBtn = document.querySelector('.action-buttons .action-btn'); // Wybieramy przycisk "Dodaj"
+
+      dodajBtn.addEventListener("click", function () {
+        window.location.href = 'DodajSprzet.html'; // Przekierowanie do pliku DodajSprzet.html
+      });
+
+      // Dodaj event listener do pól "MODEL"
+      const modelCells = document.querySelectorAll('.model-cell');
+
+      modelCells.forEach(cell => {
+        cell.addEventListener('click', function () {
+          const type = cell.getAttribute('data-type');
+          if (type === 'Komputer' || type === 'Laptop') {
+            window.location.href = 'stanmagazynowyWidokPC.html';
+          } else if (type === 'Akcesoria') {
+            window.location.href = 'stanmagazynowyWidokAKCESORIA.html';
+          }
+        });
+      });
+    });
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const modyfikujBtn = document.querySelector('.action-buttons .right-buttons .action-btn:nth-child(2)');
+
+      modyfikujBtn.addEventListener("click", function () {
+        window.location.href = 'ModSprzet.html';
+      });
+    });
+  </script>
+
+</body>
+
+</html>

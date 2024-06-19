@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strona główna</title>
+  <link rel="stylesheet" href="\css\modelAkcesoria.css">
+</head>
+
+<body>
+  <header>
+
+    <a href="stronaglowna.html" class="logo">
+      <img src="logo.png" alt="Logo firmy">
+    </a>
+
+    <div class="menu-bar">
+      <div class="menu-item">
+        <a href="{{ path('app_stan') }}"> <button id="stanMagazynowyBtn">STAN MAGAZYNOWY</button> </a>
+      </div>
+      <div class="menu-item">
+          <a href="{{ path('app_sprzet') }}"> <button id="sprzetBtn">SPRZĘT</button> </a>
+      </div>
+      <div class="menu-item">
+          <a href="{{ path('app_users') }}"> <button id="uzytkownicyBtn">UŻYTKOWNICY</button> </a>
+      </div>
+  </div>
+
+
+    <button class="logout" id="logouserBtn"><img src="logouser.png" alt="Ikona użytkownika"></button>
+  </header>
+
+  <section class="content">
+    <div class="left-panel">
+      <h2>AKCESORIA</h2>
+      <div class="image-placeholder"></div>
+      <div class="buttons-container">
+        <button class="modify-btn">MODYFIKUJ SZCZEGÓŁY</button>
+        <button class="action-btn" id="deleteButton">Usuń</button>
+      </div>
+    </div>
+    <div class="right-panel">
+      <p>TYP: {{ chosenModel.typ }}</p>
+      <p>PRODUCENT: {{ chosenModel.producent }}</p>
+      <p>MODEL: {{ chosenModel.nazwa }}</p>
+
+    </div>
+  </section>
+  <div class="PANEL-STAN">
+    <h2>STAN MAGAZYNOWY</h2>
+    <div class="quantity-box">
+      <div class="total-quantity rectangle">
+        <p>ILOŚĆ OGÓŁEM: {{ chosenModel.iloscOgolna }}</p>
+      </div>
+      <div class="available-quantity rectangle">
+        <p>ILOŚĆ DOSTĘPNA</p>
+      </div>
+    </div>
+    <button class="action-btn" id="przypiszUserBtn">PRZYPISZ</button>
+  </div>
+
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <button>Puste</button>
+      <button id="logoutBtn">Wyloguj się</button>
+    </div>
+  </div>
+
+  <div id="deleteModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p>Czy na pewno chcesz usunąć?</p>
+      <button id="deleteConfirmBtn">Tak</button>
+      <button id="deleteCancelBtn">Nie</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="navi.js"></script>
+  <script src="usunStanMag.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const przypiszBtn = document.querySelector('#przypiszUserBtn');
+
+      przypiszBtn.addEventListener("click", function () {
+        window.location.href = 'PrzypiszUSER.html';
+      });
+    });
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const modyfikujBtn = document.querySelector('.modify-btn');
+
+      modyfikujBtn.addEventListener("click", function () {
+        window.location.href = 'ModSprzet.html';
+      });
+    });
+  </script>
+
+
+</body>
+
+</html>

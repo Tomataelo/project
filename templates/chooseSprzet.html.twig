@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strona główna</title>
+    <link rel="stylesheet" href="\css\chooseSprzet.css">
+
+
+</head>
+
+<body>
+    <header>
+
+        <a href="stronaglowna.html" class="logo">
+            <img src="/images/logo.png" alt="Logo firmy">
+        </a>
+
+        <div class="menu-bar">
+            <div class="menu-item">
+              <a href="{{ path('app_stan') }}"> <button id="stanMagazynowyBtn">STAN MAGAZYNOWY</button> </a>
+            </div>
+            <div class="menu-item">
+                <a href="{{ path('app_sprzet') }}"> <button id="sprzetBtn">SPRZĘT</button> </a>
+            </div>
+            <div class="menu-item">
+                <a href="{{ path('app_users') }}"> <button id="uzytkownicyBtn">UŻYTKOWNICY</button> </a>
+            </div>
+        </div>
+        <button class="logout" id="logouserBtn"><img src="/images/logouser.png" alt="Ikona użytkownika"></button>
+    </header>
+    <div class="content">
+        <div class="menu">
+            <p>NAZWA: {{ chosenSprzet.hostname }}</p>
+            <p>PRODUCENT: {{ chosenSprzet.producent }}</p>
+            <p>MODEL: {{ chosenSprzet.nazwa }}</p>
+            <p>PRZEZNACZENIE: {{ chosenSprzet.przeznaczenie }}</p>
+        </div>
+    </div>
+    <div class="content2">
+        <div class="menu2">
+            <p>CPU: {{ chosenSprzet.cpu }}</p>
+            <p>RAM: {{ chosenSprzet.ram }} GB</p>
+            <p>DYSK: {{ chosenSprzet.dysk }}</p>
+            <p>SYSTEM: {{ chosenSprzet.systemOperacyjny }}</p>
+        </div>
+    </div>
+    <div class="contentUSER">
+        <div class="user-buttons">
+            <a href="{{ path('app_editSprzet', {'sprzet_id': chosenSprzet.id}) }}"> 
+                <button class="modify-button" id="modifyButton">MODYFIKUJ</button> 
+            </a>
+            <button class="delete-button" id="deleteButton">USUŃ</button>
+        </div>
+        <div class="menuUSER">
+            <p>ID użytkownika: </p>
+            <p>Przypisany użytkownik: </p>
+            <p>Lokalizacja: </p>
+            <p>Stanowisko: </p>
+            <p>Nr telefonu: </p>
+            <p>Data wydania: </p>
+            <p>Data zakupu: </p>
+        </div>
+    </div>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <button>Puste</button>
+            <button id="logoutBtn">Wyloguj się</button>
+        </div>
+    </div>
+
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Czy na pewno chcesz usunąć użytkownika?</p>
+            <button id="deleteConfirmBtn">Tak</button>
+            <button id="deleteCancelBtn">Nie</button>
+        </div>
+    </div>
+
+    <script src="\js\script.js"></script>
+    <script src="\js\usun.js"></script>
+    <script src="\js\navi.js"></script>
+    <script>
+        document.getElementById('modifyButton').addEventListener('click', function () {
+            window.location.href = 'ModPrzypisanegoUSER.html';
+        });
+    </script>
+</body>
+
+</html>

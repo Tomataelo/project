@@ -1,0 +1,350 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  :root {
+    --primary-color: #000058;
+    --secondary-color: #99dff5;
+    --hover-color: #2ebbe6;
+    --background-color: #e0e7ff;
+    --white-color: #ffffff;
+    --black-color: #000000;
+  }
+  
+  header {
+    background-color: var(--primary-color);
+    height: 14.28vh;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    flex-shrink: 0;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+  }
+  
+  .logo img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  
+  .menu-bar {
+    display: flex;
+    align-items: center;
+    flex: 1;
+  }
+  
+  #menu-item-stan,
+  #menu-item-sprzet,
+  #menu-item-uzytkownicy {
+    margin: 0 2vw;
+  }
+  
+  #stanMagazynowyBtn,
+  #sprzetBtn,
+  #uzytkownicyBtn {
+    padding: 2vh 4vw;
+    font-size: 2vh;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    border: 1px solid #000058;
+    border-radius: 40px;
+    cursor: pointer;
+    margin-right: 50px;
+    margin-left: 100px;
+  }
+  
+  #stanMagazynowyBtn {
+    background-color: #99dff5;
+  }
+  
+  #stanMagazynowyBtn:hover {
+    background-color: #2ebbe6;
+  }
+  
+  
+  #uzytkownicyBtn:hover,
+  #sprzetBtn:hover {
+    background-color: #e0e7ff;
+  }
+  
+  .logouser {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    flex-shrink: 1;
+  }
+  
+  .logouser button {
+    padding: 1vh 2vw;
+    font-size: 2vh;
+    background-color: var(--white-color);
+    color: var(--black-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 100%;
+    cursor: pointer;
+    flex-shrink: 1;
+  }
+  
+  .logouser button img {
+    max-height: 100%;
+    max-width: 100%;
+  }
+  
+  .logouser button:hover {
+    background-color: var(--background-color);
+  }
+  
+  .logout {
+    padding: 8px 8px;
+    background-color: var(--white-color);
+    color: var (--black-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 500px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 1;
+  }
+  
+  .logout img {
+    max-height: 50px;
+    max-width: 50px;
+  }
+  
+  .logout:hover {
+    background-color: var(--background-color);
+  }
+  
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+  }
+  
+  .modal-content {
+    background-color: var(--white-color);
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 300px;
+    border-radius: 10px;
+  }
+  
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .modal-content button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .modal-content button:hover {
+    background-color: #ddd;
+  }
+  
+  .content {
+    display: flex;
+    padding: 20px;
+  }
+  
+  .left-panel {
+    background-color: var(--white-color);
+    padding: 20px;
+    margin-right: 10px;
+    width: auto;
+    max-width: 27vw;
+  }
+  
+  .left-panel h2 {
+    margin-top: 0;
+  }
+  
+  .image-placeholder {
+    width: 27vw;
+    height: 27vw;
+    background-color: #ddd;
+    margin-bottom: 20px;
+  }
+  
+  .buttons-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .modify-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    width: calc(50% - 5px);
+    height: auto;
+    border-radius: 40px;
+  }
+  
+  #deleteButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    width: calc(50% - 5px);
+    height: auto;
+    border-radius: 40px;
+  }
+  
+  .modify-btn {
+    background-color: var(--secondary-color);
+  }
+  
+  .modify-btn:hover {
+    background-color: var(--hover-color);
+  }
+  
+  #deleteButton {
+    background-color: #99dff5;
+    color: #000000;
+  }
+  
+  #deleteButton:hover {
+    background-color: var(--hover-color);
+  }
+  
+  .right-panel {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 3.4vw;
+  }
+  
+  .right-panel p {
+    margin: 10px 0;
+    text-align: left;
+  }
+  
+  .left-panel h2 {
+    font-size: 2vw;
+  }
+  
+  .right-panel p {
+    font-size: 2vh;
+  }
+  
+  .PANEL-STAN {
+    width: 30vh;
+    height: 5vw;
+    background-color: var(--white-color);
+    padding: 20px;
+    font-size: 2.5vh;
+    margin-left: auto;
+    margin-right: 10px;
+    width: auto;
+    max-width: 27vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+  }
+  
+  .quantity-box {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .total-quantity,
+  .available-quantity {
+    margin-right: 10px;
+  }
+  
+  .PANEL-STAN .rectangle {
+    width: 30vh;
+    height: 5vw;
+    background-color: #99dff5;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .PANEL-STAN .rectangle p {
+    margin: -6vh 0 0;
+    font-size: 16px;
+  }
+  
+  .assign-btn .assign-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    width: calc(50% - 5px);
+    height: auto;
+  }
+  
+  .PANEL-STAN .assign-btn {
+    padding: 1vh 2vw;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    width: calc(100% - 200px);
+    background-color: var(--secondary-color);
+    color: var(--black-color);
+    border-radius: 40px;
+  }
+  
+  .PANEL-STAN .assign-btn:hover {
+    background-color: var(--hover-color);
+  }
+  
+  #przypiszUserBtn {
+    padding: 1vh 2vw !important;
+    font-size: 16px !important;
+    border: none !important;
+    cursor: pointer !important;
+    width: calc(100% - 200px) !important;
+    ;
+    background-color: var(--secondary-color) !important;
+    ;
+    color: var(--black-color) !important;
+    ;
+    border-radius: 40px !important;
+    ;
+  }
+  
+  #przypiszUserBtn:hover {
+    background-color: var(--hover-color) !important;
+    ;
+  }
