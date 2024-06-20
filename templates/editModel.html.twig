@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strona główna</title>
+    <link rel="stylesheet" href="/css/editSprzet.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+</head>
+
+<body>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <header>
+
+        <a href="/index" class="logo">
+            <img src="/images/logo.png" alt="Logo firmy">
+        </a>
+
+        <div class="menu-bar">
+            <div class="menu-item">
+              <a href="{{ path('app_stan') }}"> <button id="stanMagazynowyBtn">STAN MAGAZYNOWY</button> </a>
+            </div>
+            <div class="menu-item">
+                <a href="{{ path('app_sprzet') }}"> <button id="sprzetBtn">SPRZĘT</button> </a>
+            </div>
+            <div class="menu-item">
+                <a href="{{ path('app_users') }}"> <button id="uzytkownicyBtn">UŻYTKOWNICY</button> </a>
+            </div>
+        </div>
+        <button class="logout" id="logouserBtn"><img src="logouser.png" alt="Ikona użytkownika"></button>
+    </header>
+
+    <main class="main-content">
+        <h1>Sprzęt który modyfikujesz: {{ chosenModel.nazwa }}</h1>
+        <form class="form-content" method="POST">
+            <div class="form-group">
+                <label for="Typ">Typ</label>
+                <input type="text" id="typ" name="typ">
+            </div>
+            <div class="form-group">
+                <label for="Nazwa">Nazwa</label>
+                <input type="text" id="nazwa" name="nazwa">
+            </div>
+            <div class="form-group">
+                <label for="Producent">Producent</label>
+                <input type="text" id="producent" name="producent">
+            </div>
+            <div class="form-group">
+                <label for="SystemOperacyjny">System operacyjny</label>
+                <input type="text" id="systemOperacyjny" name="systemOperacyjny">
+            </div>
+            <div class="form-group">
+                <label for="CPU">CPU</label>
+                <input type="text" id="cpu" name="cpu">
+            </div>
+            <div class="form-group">
+                <label for="RAM">RAM</label>
+                <input type="text" id="ram" name="ram">
+            </div>
+            <div class="form-group">
+                <label for="Dysk">Dysk</label>
+                <input type="text" id="dysk" name="dysk">
+            </div>
+            <div class="form-group">
+                <label for="Przeznaczenie">Przeznaczenie</label>
+                <input type="text" id="przeznaczenie" name="przeznaczenie">
+            </div>
+            <div class="form-group">
+                <label for="IloscOgolna">Ilość ogólna</label>
+                <input type="number" id="iloscOgolna" name="iloscOgolna">
+            </div>
+
+            <button id="dodajBtn" type="submit">DODAJ</button>
+        </form>
+    </main>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <button>Puste</button>
+            <button id="logoutBtn">Wyloguj się</button>
+        </div>
+    </div>
+
+    {% for message in app.session.flashBag.get('success') %}
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Sukces',
+            text: '{{ message }}',
+            confirmButtonText: 'OK'
+        });
+    </script>
+{% endfor %}
+
+    <script src="navi.js"></script>
+    <script src="dodaj.js"></script>
+    <script src="script.js"></script>
+
+</body>
+
+</html>

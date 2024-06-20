@@ -34,7 +34,7 @@
       <h2>KOMPUTER/LAPTOP</h2>
       <div class="image-placeholder"></div>
       <div class="buttons-container">
-        <button class="modify-btn">MODYFIKUJ SZCZEGÓŁY</button>
+        <button class="modify-btn" data-model-id="{{ chosenModel.id }}">MODYFIKUJ SZCZEGÓŁY</button>
       </div>
     </div>
     <div class="right-panel">
@@ -84,23 +84,14 @@
   <script src="usunStanMag.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      const przypiszBtn = document.querySelector('#przypiszUserBtn');
-
-      przypiszBtn.addEventListener("click", function () {
-        window.location.href = 'PrzypiszUSER.html';
-      });
-    });
-  </script>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
       const modyfikujBtn = document.querySelector('.modify-btn');
 
       modyfikujBtn.addEventListener("click", function () {
-        window.location.href = 'ModSprzet.html';
+        const modelId = modyfikujBtn.getAttribute('data-model-id');
+        window.location.href = '/editModel/' + modelId;;
       });
     });
-  </script>
-  <script>
+
     document.addEventListener("DOMContentLoaded", function () {
       const przypiszBtn = document.querySelector('#przypiszUserBtn');
   

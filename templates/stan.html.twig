@@ -36,7 +36,9 @@
 
   <div class="action-buttons">
     <div class="right-buttons">
-      <button class="action-btn">Dodaj</button>
+      <a href="{{ path('app_addModel') }}"> <button class="action-btn">Dodaj</button> </a>
+
+<form action="" method="POST" class="delete_model">
       <button class="action-btn" id="deleteButton">Usuń</button>
     </div>
   </div>
@@ -135,7 +137,7 @@
       </div>
     </div>
   </div>
-
+</form>
 
   <div id="myModal" class="modal">
     <div class="modal-content">
@@ -156,35 +158,6 @@
 
   <script src="script.js"></script>
   <script src="navi.js"></script>
-
-
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const modelCells = document.querySelectorAll('.model-cell');
-
-      modelCells.forEach(cell => {
-        cell.addEventListener('click', function () {
-          const type = cell.getAttribute('data-type');
-          if (type === 'Komputer' || type === 'Laptop') {
-            window.location.href = 'stanmagazynowyWidokPC.html';
-          } else if (type === 'Akcesoria') {
-            window.location.href = 'stanmagazynowyWidokAKCESORIA.html';
-          }
-        });
-      });
-    });
-  </script>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const modyfikujBtn = document.querySelector('.action-buttons .right-buttons .action-btn:nth-child(2)');
-
-      modyfikujBtn.addEventListener("click", function () {
-        window.location.href = 'ModSprzet.html';
-      });
-    });
-  </script>
-
 </body>
 
 </html>

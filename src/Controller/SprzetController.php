@@ -19,7 +19,6 @@ class SprzetController extends AbstractController
     #[Route('/sprzet', name: 'app_sprzet')]
     public function sprzet(EntityManagerInterface $entityManager, Request $request, SessionInterface $session): Response
     {
-
         $sprzet = $entityManager->getRepository(Sprzet::class)->findAll();
         $users = $entityManager->getRepository(Uzytkownicy::class)->findAll();
 
@@ -41,30 +40,52 @@ class SprzetController extends AbstractController
         ]);
     }
 
+
+
     #[Route('/assignSprzet/{sprzet_id}', name: 'app_assignSprzet')]
     public function assignSprzet(int $sprzet_id, Request $request, EntityManagerInterface $entityManager, SessionInterface $session): Response
     {
-        $selectedSprzetIds = $session->get('selectedSprzet');
+        $selectedSprzet = $entityManager->getRepository(Sprzet::class)->find($sprzet_id);
+        $users = $entityManager->getRepository(Uzytkownicy::class)->findAll();
 
-        if (!empty($selectedSprzetIds)) 
+        if ($request->isMethod('POST')) 
         {
-            $choosenSprzet = [];
+            $selectedUserId = $request->request->get('uzytkownik');
+            $selectedDate = $request->request->get('data-wydania');
 
-            foreach ($selectedSprzetIds as $sprzetId) {
-                $choosenSprzet[] = $entityManager->getRepository(Sprzet::class)->find($sprzetId);
-            }
-    
-            $session->remove('selectedSprzet');
+            $selectedSprzet = $entityManager->getRepository(Sprzet::class)->find($selectedSprzet);
+            $selectedUser = $entityManager->getRepository(Uzytkownicy::class)->find($selectedUserId);
+
+            $imie_nazwisko = $selectedUser->getImieNazwisko();
+            $lokalizacja = $selectedUser->getLokalizacja();
+            $stanowisko = $selectedUser->getStanowisko();
+            $tel = $selectedUser->getTel();
+            $tel = str_replace(" ", "", $tel);
+            $tel = str_replace("-", "", $tel);
+
+            $selectedSprzet->setIdUzytkownika($selectedUserId);
+            $selectedSprzet->setPrzypisanyUzytkownik($imie_nazwisko);
+            $selectedSprzet->setLokalizacja($lokalizacja);
+            $selectedSprzet->setStanowisko($stanowisko);
+            $selectedSprzet->setNrTel($tel);
+            $selectedSprzet->setDataWydania($selectedDate);
+
+
+            $entityManager->persist($selectedSprzet);
+            $entityManager->flush();
         }
-    
-        return $this->render('assignSprzet.html.twig');
+
+        return $this->render('assignSprzet.html.twig', [
+            'selectedSprzet' => $selectedSprzet,
+            'users' => $users
+        ]);
     }
     
+
 
     #[Route('/sprzet/{sprzet_id}', name: 'app_getSprzet')]
     public function getSprzet(int $sprzet_id, EntityManagerInterface $entityManager): Response
     {
-
         $chosenSprzet = $entityManager->getRepository(Sprzet::class)->find($sprzet_id);
 
         return $this->render('chooseSprzet.html.twig', [
@@ -77,7 +98,6 @@ class SprzetController extends AbstractController
     #[Route('/addSprzet', name: 'app_addSprzet')]
     public function addSprzet(Request $request, EntityManagerInterface $entityManager, SessionInterface $session): Response
     {
-
         if ($request->isMethod('POST')) 
         {
             $sprzet = new Sprzet();
@@ -109,7 +129,6 @@ class SprzetController extends AbstractController
     #[Route('/editSprzet/{sprzet_id}', name: 'app_editSprzet')]
     public function editSprzet(int $sprzet_id, Request $request, EntityManagerInterface $entityManager, SessionInterface $session): Response
     {
-
         $chosenSprzet = $entityManager->getRepository(Sprzet::class)->find($sprzet_id);
 
         if ($request->isMethod('POST')) 

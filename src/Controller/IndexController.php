@@ -10,12 +10,6 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class IndexController extends AbstractController
 {
-    // private $productService;
-
-    // public function __construct(ProductService $productService) {
-    //     $this->productService = $productService;
-    // }
-
     #[Route('/index', name: 'mainpage', methods: ['GET', 'POST'])]
     public function index(Request $request): Response {
 

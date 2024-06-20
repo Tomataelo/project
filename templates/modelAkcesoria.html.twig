@@ -80,6 +80,15 @@
   <script src="/js/navi.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
+      const modyfikujBtn = document.querySelector('.modify-btn');
+
+      modyfikujBtn.addEventListener("click", function () {
+        const modelId = modyfikujBtn.getAttribute('data-model-id');
+        window.location.href = '/editModel/' + modelId;;
+      });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
       const przypiszBtn = document.querySelector('#przypiszUserBtn');
   
       przypiszBtn.addEventListener("click", function () {
