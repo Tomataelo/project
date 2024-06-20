@@ -27,6 +27,8 @@ header {
     height: auto;
 }
 
+
+
 .menu-bar {
     display: flex;
     align-items: center;
@@ -53,17 +55,15 @@ header {
     margin-left: 100px;
 }
 
-#sprzetBtn {
-    background-color: #99dff5;
-}
 
-
-#sprzetBtn:hover {
-    background-color: #2ebbe6;
-}
 
 #stanMagazynowyBtn:hover,
+#sprzetBtn:hover,
 #uzytkownicyBtn:hover {
+    background-color: #e0e7ff;
+}
+
+.menu-item button:hover {
     background-color: #e0e7ff;
 }
 
@@ -130,7 +130,7 @@ header {
 .form-group input,
 .form-group select {
     width: 100%;
-    padding: 1px;
+    padding: 10px;
     font-size: 1em;
     border: 1px solid #000058;
     border-radius: 5px;

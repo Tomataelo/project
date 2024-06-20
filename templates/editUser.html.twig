@@ -5,38 +5,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Strona główna</title>
-    <link rel="stylesheet" href="ModPrzypisanySprzet.css">
+    <link rel="stylesheet" href="/css/editUser.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
 </head>
 
 <body>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <header>
 
-        <a href="stronaglowna.html" class="logo">
-            <img src="logo.png" alt="Logo firmy">
+        <a href="/index" class="logo">
+            <img src="/images/logo.png" alt="Logo firmy">
         </a>
 
         <div class="menu-bar">
             <div class="menu-item">
-                <button id="stanMagazynowyBtn">STAN MAGAZYNOWY</button>
+                <a href="{{ path('app_stan') }}"> <button id="stanMagazynowyBtn">STAN MAGAZYNOWY</button> </a>
             </div>
             <div class="menu-item">
-                <button id="sprzetBtn">SPRZĘT</button>
+                <a href="{{ path('app_sprzet') }}"> <button id="sprzetBtn">SPRZĘT</button> </a>
             </div>
             <div class="menu-item">
-                <button id="uzytkownicyBtn">UŻYTKOWNICY</button>
+                <a href="{{ path('app_users') }}"> <button id="uzytkownicyBtn">UŻYTKOWNICY</button> </a>
             </div>
         </div>
         <button class="logout" id="logouserBtn"><img src="logouser.png" alt="Ikona użytkownika"></button>
     </header>
 
     <main class="main-content">
-        <h1>Sprzęt który modyfikujesz: </h1>
-        <form class="form-content">
+        <h1>Użytkownik którego modyfikujesz: {{ chosenUser.imieNazwisko }} </h1>
+        <form class="form-content" method="POST">
 
-            <div class="form-group">
-                <label for="lokalizacja">Imię nazwisko</label>
-                <input type="text" id="lokalizacja" name="lokalizacja">
-            </div>
             <div class="form-group">
                 <label for="lokalizacja">Lokalizacja</label>
                 <input type="text" id="lokalizacja" name="lokalizacja">
@@ -50,7 +51,7 @@
                 <input type="text" id="telefon" name="telefon">
             </div>
 
-            <button id="dodajBtn" type="button">ZAPISZ</button>
+            <button id="dodajBtn" type="submit">ZAPISZ</button>
         </form>
     </main>
 
@@ -61,6 +62,17 @@
             <button id="logoutBtn">Wyloguj się</button>
         </div>
     </div>
+
+    {% for message in app.session.flashBag.get('success') %}
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Sukces',
+            text: '{{ message }}',
+            confirmButtonText: 'OK'
+        });
+    </script>
+{% endfor %}
 
     <script src="navi.js"></script>
     <script src="dodaj.js"></script>

@@ -13,7 +13,7 @@
 <body>
     <header>
 
-        <a href="stronaglowna.html" class="logo">
+        <a href="/index" class="logo">
             <img src="/images/logo.png" alt="Logo firmy">
         </a>
 
@@ -51,16 +51,15 @@
             <a href="{{ path('app_editSprzet', {'sprzet_id': chosenSprzet.id}) }}"> 
                 <button class="modify-button" id="modifyButton">MODYFIKUJ</button> 
             </a>
-            <button class="delete-button" id="deleteButton">USUŃ</button>
         </div>
         <div class="menuUSER">
-            <p>ID użytkownika: </p>
-            <p>Przypisany użytkownik: </p>
-            <p>Lokalizacja: </p>
-            <p>Stanowisko: </p>
-            <p>Nr telefonu: </p>
-            <p>Data wydania: </p>
-            <p>Data zakupu: </p>
+            <p>ID użytkownika: {{ chosenSprzet.idUzytkownika }}</p>
+            <p>Przypisany użytkownik:  {{ chosenSprzet.przypisanyUzytkownik }}</p>
+            <p>Lokalizacja:  {{ chosenSprzet.lokalizacja }}</p>
+            <p>Stanowisko:  {{ chosenSprzet.stanowisko }}</p>
+            <p>Nr telefonu:  {{ chosenSprzet.nrTel }}</p>
+            <p>Data wydania:  {{ chosenSprzet.dataWydania }}</p>
+            <p>Data zakupu:  {{ chosenSprzet.dataZakupu }}</p>
         </div>
     </div>
     <div id="myModal" class="modal">

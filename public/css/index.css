@@ -33,21 +33,37 @@ body {
     flex: 1;
   }
   
-  .menu-item {
+  
+  .menu-bar {
+    display: flex;
+    align-items: center;
+    flex: 1;
+  }
+  
+  #menu-item-stan,
+  #menu-item-sprzet,
+  #menu-item-uzytkownicy {
     margin: 0 2vw;
   }
   
-  .menu-item button {
+  #stanMagazynowyBtn,
+  #sprzetBtn,
+  #uzytkownicyBtn {
     padding: 2vh 4vw;
     font-size: 2vh;
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     color: rgb(0, 0, 0);
     border: 1px solid #000058;
     border-radius: 40px;
     cursor: pointer;
+    margin-right: 50px;
+    margin-left: 100px;
   }
   
-  .menu-item button:hover {
+  
+  #stanMagazynowyBtn:hover,
+  #uzytkownicyBtn:hover,
+  #sprzetBtn:hover {
     background-color: #e0e7ff;
   }
   
@@ -166,4 +182,15 @@ body {
   
   .modal-content button:hover {
     background-color: #ddd;
+  }
+  
+  .chart-container {
+    width: 75vw;
+    height: 70vh;
+    max-width: 1200px;
+    max-height: 600px;
+    border: 8px solid #000058;
+    border-radius: 20px;
+    margin: 30px auto;
+    display: flex;
   }

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Strona główna</title>
-    <link rel="stylesheet" href="/css/assignUser.css">
+    <link rel="stylesheet" href="/css/assignModel.css">
 </head>
 
 <body>
@@ -17,7 +17,7 @@
 
         <div class="menu-bar">
             <div class="menu-item">
-              <a href="{{ path('app_stan') }}"> <button id="stanMagazynowyBtn">STAN MAGAZYNOWY</button> </a>
+                <a href="{{ path('app_stan') }}"> <button id="stanMagazynowyBtn">STAN MAGAZYNOWY</button> </a>
             </div>
             <div class="menu-item">
                 <a href="{{ path('app_sprzet') }}"> <button id="sprzetBtn">SPRZĘT</button> </a>
@@ -27,38 +27,34 @@
             </div>
         </div>
 
-        <button class="logout" id="logouserBtn"><img src="/images/logouser.png" alt="Ikona użytkownika"></button>
+        <button class="logout" id="logouserBtn"><img src="logouser.png" alt="Ikona użytkownika"></button>
     </header>
 
     <main class="main-content">
-        <h1>MODEL KTÓRY PRZYPISUJESZ</h1>
-        <form class="form-content">
+        <h1>MODEL KTÓRY PRZYPISUJESZ: {{ chosenModel.nazwa }} </h1>
+        <form class="form-content" method="POST">
             <div class="form-group">
                 <label for="sprzet">WYBIERZ SPRZĘT</label>
-                <input type="text" id="sprzet" name="sprzet">
+                <select id="sprzet" name="sprzet">
+                    {% for sprzet in sprzety %}
+                        <option value="{{ sprzet.id }}">{{ sprzet.hostname }}</option>
+                    {% endfor %}
+                </select>
+
             </div>
             <div class="form-group">
                 <label for="uzytkownik">WYBIERZ UŻYTKOWNIKA</label>
                 <select id="uzytkownik" name="uzytkownik">
-                    <option value="user1">Jan Kowalski</option>
-                    <option value="user2">Arkadiusz Wałęsa</option>
-                    <option value="user3">Marta Gołąbek</option>
-                    <option value="user1">Joanna Zielarz</option>
-                    <option value="user2">Bogdan Miśkiewicz</option>
-                    <option value="user3">Marek Pochopień</option>
-                    <option value="user1">Aleksandra Cholypka</option>
-                    <option value="user2">Sebastian Bąk</option>
-                    <option value="user3">Łukasz Piętaszek</option>
-                    <option value="user1">Kamil Zdun</option>
-                    <option value="user2">Tytus Bomba</option>
-                    <option value="user3">Michał Niemy</option>
+                    {% for user in users %}
+                        <option value="{{ user.id }}">{{ user.imieNazwisko }}</option>
+                    {% endfor %}
                 </select>
             </div>
             <div class="form-group">
                 <label for="data-wydania">DATA WYDANIA</label>
                 <input type="date" id="data-wydania" name="data-wydania">
             </div>
-            <button id="dodajBtn" type="button">PRZYPISZ</button>
+            <button id="dodajBtn" type="submit">PRZYPISZ</button>
         </form>
     </main>
 
@@ -70,9 +66,9 @@
         </div>
     </div>
 
-    <script src="\js\navi.js"></script>
-    <script src="\js\script.js"></script>
-    <script src="\js\dodaj.js"></script>
+    <script src="navi.js"></script>
+    <script src="script.js"></script>
+    <script src="dodaj.js"></script>
 
 </body>
 

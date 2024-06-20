@@ -240,7 +240,7 @@ header {
 
 .user-buttons {
     display: flex;
-    justify-content: space-between;
+    justify-content: right;
     margin-bottom: 10px;
 }
 

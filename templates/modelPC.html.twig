@@ -11,8 +11,8 @@
 <body>
   <header>
 
-    <a href="stronaglowna.html" class="logo">
-      <img src="logo.png" alt="Logo firmy">
+    <a href="/index" class="logo">
+      <img src="/images/logo.png" alt="Logo firmy">
     </a>
 
     <div class="menu-bar">
@@ -35,7 +35,6 @@
       <div class="image-placeholder"></div>
       <div class="buttons-container">
         <button class="modify-btn">MODYFIKUJ SZCZEGÓŁY</button>
-        <button class="action-btn" id="deleteButton">Usuń</button>
       </div>
     </div>
     <div class="right-panel">
@@ -59,7 +58,7 @@
         <p>ILOŚĆ DOSTĘPNA</p>
       </div>
     </div>
-    <button class="action-btn" id="przypiszUserBtn">PRZYPISZ</button>
+    <button class="action-btn" type="submit" data-model-id="{{ chosenModel.id }}" id="przypiszUserBtn">PRZYPISZ</button>
   </div>
 
 
@@ -101,7 +100,16 @@
       });
     });
   </script>
-
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const przypiszBtn = document.querySelector('#przypiszUserBtn');
+  
+      przypiszBtn.addEventListener("click", function () {
+        const modelId = przypiszBtn.getAttribute('data-model-id');
+        window.location.href = '/assignModel/' + modelId;
+      });
+    });
+  </script>
 
 </body>
 

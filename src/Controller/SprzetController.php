@@ -28,9 +28,11 @@ class SprzetController extends AbstractController
             $all = $request->request->all();
             $selectedSprzetIds = $all['selectedSprzet'] ?? [];
 
-            $session->set('selectedSprzet', $selectedSprzetIds);
-            
-            return $this->redirectToRoute('app_assignSprzet');
+            foreach ($selectedSprzetIds as $sprzetId) {
+                $sprzet = $entityManager->getRepository(Sprzet::class)->find($sprzetId);
+                $entityManager->remove($sprzet);
+            }
+            $entityManager->flush();
         }
 
         return $this->render('sprzet.html.twig', [
@@ -39,8 +41,8 @@ class SprzetController extends AbstractController
         ]);
     }
 
-    #[Route('/assignSprzet', name: 'app_assignSprzet')]
-    public function assignSprzet(Request $request, EntityManagerInterface $entityManager, SessionInterface $session): Response
+    #[Route('/assignSprzet/{sprzet_id}', name: 'app_assignSprzet')]
+    public function assignSprzet(int $sprzet_id, Request $request, EntityManagerInterface $entityManager, SessionInterface $session): Response
     {
         $selectedSprzetIds = $session->get('selectedSprzet');
 

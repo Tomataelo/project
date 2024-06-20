@@ -6,14 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Strona główna</title>
   <link rel="stylesheet" href="\css\stan.css">
-  <script src="pagination.js"></script>
+  <script src="/js/pagination.js"></script>
 
 </head>
 
 <body>
   <header>
 
-    <a href="stronaglowna.html" class="logo">
+    <a href="/index" class="logo">
       <img src="/images/logo.png" alt="Logo firmy">
     </a>
 
@@ -31,13 +31,12 @@
 
 
 
-    <button class="logout" id="logouserBtn"><img src="logouser.png" alt="Ikona użytkownika"></button>
+    <button class="logout" id="logouserBtn"><img src="/css/logouser.png" alt="Ikona użytkownika"></button>
   </header>
 
   <div class="action-buttons">
     <div class="right-buttons">
       <button class="action-btn">Dodaj</button>
-      <button class="action-btn">Modyfikuj</button>
       <button class="action-btn" id="deleteButton">Usuń</button>
     </div>
   </div>
@@ -157,19 +156,11 @@
 
   <script src="script.js"></script>
   <script src="navi.js"></script>
-  <script src="usunStanMag.js"></script>
 
 
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      const dodajBtn = document.querySelector('.action-buttons .action-btn'); // Wybieramy przycisk "Dodaj"
-
-      dodajBtn.addEventListener("click", function () {
-        window.location.href = 'DodajSprzet.html'; // Przekierowanie do pliku DodajSprzet.html
-      });
-
-      // Dodaj event listener do pól "MODEL"
       const modelCells = document.querySelectorAll('.model-cell');
 
       modelCells.forEach(cell => {
