@@ -34,12 +34,15 @@
   <section class="content">
     <div class="left-panel">
       <h2>AKCESORIA</h2>
-      <div class="image-placeholder"></div>
+      <div class="image-placeholder">
+        <img src="{{ chosenModelImage }}" alt="Chosen Model">
+      </div>
       <div class="buttons-container">
-        <button class="modify-btn">MODYFIKUJ SZCZEGÓŁY</button>
+        <button class="modify-btn" data-model-id="{{ chosenModel.id }}">MODYFIKUJ SZCZEGÓŁY</button>
       </div>
     </div>
     <div class="right-panel">
+      <p>ID MODELU: {{ chosenModel.id }}</p>
       <p>TYP: {{ chosenModel.typ }}</p>
       <p>PRODUCENT: {{ chosenModel.producent }}</p>
       <p>MODEL: {{ chosenModel.nazwa }}</p>
@@ -53,7 +56,7 @@
         <p>ILOŚĆ OGÓŁEM: {{ chosenModel.iloscOgolna }}</p>
       </div>
       <div class="available-quantity rectangle">
-        <p>ILOŚĆ DOSTĘPNA</p>
+        <p>ILOŚĆ DOSTĘPNA: {{ chosenModel.iloscOgolna - quantityAvailable }}</p>
       </div>
     </div>
     <button class="action-btn" type="submit" data-model-id="{{ chosenModel.id }}" id="przypiszUserBtn">PRZYPISZ</button>
@@ -82,20 +85,30 @@
     document.addEventListener("DOMContentLoaded", function () {
       const modyfikujBtn = document.querySelector('.modify-btn');
 
+      console.log(modyfikujBtn);
+
       modyfikujBtn.addEventListener("click", function () {
         const modelId = modyfikujBtn.getAttribute('data-model-id');
-        window.location.href = '/editModel/' + modelId;;
+        window.location.href = '/editModel/' + modelId;
       });
     });
 
-    document.addEventListener("DOMContentLoaded", function () {
-      const przypiszBtn = document.querySelector('#przypiszUserBtn');
-  
-      przypiszBtn.addEventListener("click", function () {
-        const modelId = przypiszBtn.getAttribute('data-model-id');
-        window.location.href = '/assignModel/' + modelId;
+    document.addEventListener('DOMContentLoaded', function() {
+      var przypiszBtn = document.getElementById('przypiszUserBtn');
+
+      przypiszBtn.addEventListener('click', function(event) {
+          var availableQuantity = parseInt(document.querySelector('.available-quantity p').textContent.split(': ')[1]);
+
+          if (availableQuantity === 0) {
+              event.preventDefault(); 
+              alert('Nie można przypisać, ponieważ nie ma dostępnych sprzętów.');
+          } else {
+              const modelId = przypiszBtn.getAttribute('data-model-id');
+              window.location.href = '/assignModel/' + modelId;
+          }
       });
-    });
+  });
+
   </script>
 
 

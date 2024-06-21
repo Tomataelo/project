@@ -13,6 +13,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Modele;
 use App\Entity\Uzytkownicy;
 use App\Entity\Sprzet;
+use App\Entity\Obrazki;
 
 
 class StanController extends AbstractController
@@ -20,15 +21,24 @@ class StanController extends AbstractController
     #[Route('/stan', name: 'app_stan')]
     public function stan(EntityManagerInterface $entityManager, Request $request, SessionInterface $session): Response
     {   
-        if($request->isMethod('POST'))
+        if ($request->isMethod('POST')) 
         {
             $postData = $request->request->all();
             $selectedModelsIds = $postData['selectedModels'] ?? [];
-
+    
             foreach ($selectedModelsIds as $modelId) {
                 $model = $entityManager->getRepository(Modele::class)->find($modelId);
-                $entityManager->remove($model);
+    
+                $relatedSprzety = $entityManager->getRepository(Sprzet::class)->findBy(['id_modelu' => $modelId]);
+                foreach ($relatedSprzety as $sprzet) {
+                    $entityManager->remove($sprzet);
+                }
+    
+                if ($model !== null) {
+                    $entityManager->remove($model);
+                }
             }
+    
             $entityManager->flush();
         }
 
@@ -45,8 +55,12 @@ class StanController extends AbstractController
     public function model(int $model_id, Request $request, EntityManagerInterface $entityManager, SessionInterface $session): Response
     {
         $chosenModel = $entityManager->getRepository(Modele::class)->find($model_id);
-
         $deviceType = $chosenModel->getTyp();
+
+        $chosenModelImage = $entityManager->getRepository(Obrazki::class)->find($model_id);
+        $chosenModelUrlImage = $chosenModelImage->getObraz();
+
+        $countOfSprzet = $entityManager->getRepository(Sprzet::class)->countSprzetByModelIdWithUserIdGreaterThanZero($model_id);
 
         $template = 'modelAkcesoria.html.twig';
         if ($deviceType === 'laptop' || $deviceType === 'komputer stacjonarny') {
@@ -54,7 +68,9 @@ class StanController extends AbstractController
         }
 
         return $this->render($template, [
-            'chosenModel' => $chosenModel
+            'chosenModel' => $chosenModel,
+            'quantityAvailable' => $countOfSprzet,
+            'chosenModelImage' => $chosenModelUrlImage
         ]);
     }
 

@@ -350,3 +350,7 @@ body {
     background-color: var(--hover-color) !important;
     ;
   }
+  img {
+    height: 690px;
+    width: 690px;
+}

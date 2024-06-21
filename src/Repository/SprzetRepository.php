@@ -40,4 +40,17 @@ class SprzetRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function countSprzetByModelIdWithUserIdGreaterThanZero(int $modelId)
+    {
+        $qb = $this->createQueryBuilder('s');
+        $qb->select('COUNT(s.id)')  // Użyjemy funkcji COUNT() aby zliczyć wyniki
+           ->where('s.id_modelu = :modelId')
+           ->andWhere('s.id_uzytkownika > 0')  // Zmieniamy warunek na większe od 0
+           ->setParameter('modelId', $modelId);
+    
+        // Zwraca pojedynczy wynik jako liczba
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
 }
